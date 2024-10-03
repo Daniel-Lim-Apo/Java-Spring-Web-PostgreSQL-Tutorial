@@ -1,9 +1,7 @@
 package com.sede.tutorial.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -24,4 +22,21 @@ public class CustomerController {
     public List<Customer> getCustomers(){
         return customerService.getCustomers();
     }
+
+    @PostMapping
+    public void registerNewCustomer(@RequestBody Customer customer){
+        customerService.addNewCustomer(customer);
+    }
+
+    @DeleteMapping(path = "{customerId}")
+    public void deleteCustomer(
+            @PathVariable("customerId") Long customerId){
+        customerService.deleteCustomer(customerId);
+    }
+
+    @PutMapping
+    public void updateCustomer(@RequestBody Customer customer){
+        customerService.updateCustomer(customer);
+    }
+
 }
